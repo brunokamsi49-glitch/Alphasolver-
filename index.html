@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruno Math Solver</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.9.0/math.min.js"></script>
+<script src="https://www.desmos.com/api/v1.7/calculator.js"></script>
+<style>
+body {font-family: Arial, sans-serif; margin:0; background:#f9f9f9; color:#222;}
+header {background:#003366; color:white; padding:1rem; text-align:center; position: sticky; top:0;}
+main {max-width:800px; margin:auto; padding:1rem;}
+input, button {padding:10px; font-size:1rem; margin:0.5rem; width:90%; max-width:400px;}
+#output {background:#fff; padding:1rem; margin:1rem 0; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+#ad-banner {margin:1rem 0; text-align:center;}
+button:hover {background:#0066cc; color:white; cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Bruno Math Solver</h1>
+<div id="ad-banner">
+  <!-- AdSense Banner Placeholder -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-xxxxxxxxxx"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</div>
+</header>
+
+<main>
+<section>
+<h2>🧮 Solve Math Problems</h2>
+<input type="text" id="problem" placeholder="Enter equation or expression (e.g., x^2+5x+6=0)">
+<button onclick="solveProblem()">Solve</button>
+<div id="output"></div>
+</section>
+
+<section>
+<h2>📈 Graph Functions</h2>
+<div id="calculator" style="width:100%; height:400px;"></div>
+</section>
+</main>
+
+<script>
+// Initialize Desmos
+const elt = document.getElementById('calculator');
+const calculator = Desmos.GraphingCalculator(elt, {expressions:true, settingsMenu:false});
+
+// Solve math problem using Math.js
+function solveProblem(){
+    const input = document.getElementById("problem").value;
+    const output = document.getElementById("output");
+    output.innerHTML = "";
+    try {
+        if(input.includes("=")){
+            const eq = input.split("=");
+            const solutions = math.solve(eq[0], "x"); // solve for x
+            output.innerHTML = "<b>Solutions:</b> "+JSON.stringify(solutions);
+        } else {
+            const result = math.evaluate(input);
+            output.innerHTML = "<b>Result:</b> "+result;
+        }
+    } catch(err){
+        output.innerHTML = "<b>Error:</b> "+err;
+    }
+}
+
+// Simulated interstitial ad every 3 minutes
+setInterval(()=>{
+    alert("💡 Interstitial Ad Placeholder (replace with AdSense)");
+}, 180000);
+
+// Load AdSense banners
+(window.adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- AdSense script -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
